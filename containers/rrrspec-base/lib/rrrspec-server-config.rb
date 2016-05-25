@@ -42,5 +42,42 @@ end
 
 RRRSpec.configure(:web) do |conf|
   conf.persistence_db = DB_CONFIG
-  conf.execute_log_text_path = '/tmp/rrrspec-log-texts'
+  conf.execute_log_text_path = '/opt/logs'
+end
+
+RRRSpec.configure(:client) do |conf|
+  Time.zone_default = Time.find_zone('Asia/Tokyo')
+  conf.redis = { host: 'redis', port: 6379 }
+
+  conf.packaging_dir = `git rev-parse --show-toplevel`.strip
+  conf.rsync_remote_path = 'rsync://rsyncd/data/'
+  conf.rsync_options = %w(
+    --compress
+    --times
+    --recursive
+    --links
+    --perms
+    --inplace
+    --delete
+  ).join(' ')
+
+  conf.spec_files = lambda do
+    Dir.chdir(conf.packaging_dir) do
+      Dir['spec/**{,/*/**}/*_spec.rb'].uniq
+    end
+  end
+
+  conf.setup_command = <<-SETUP
+    bundle install
+  SETUP
+  conf.slave_command = <<-SLAVE
+    rrrspec slave
+  SLAVE
+
+  conf.taskset_class = 'myapplication'
+  conf.worker_type = 'default'
+  conf.max_workers = 10
+  conf.max_trials = 3
+  conf.unknown_spec_timeout_sec = 8 * 60
+  conf.least_timeout_sec = 60
 end
