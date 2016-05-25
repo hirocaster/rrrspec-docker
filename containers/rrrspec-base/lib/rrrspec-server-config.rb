@@ -19,13 +19,13 @@ RRRSpec.configure(:server) do |conf|
   conf.redis = REDIS_CONFIG
 
   conf.persistence_db = DB_CONFIG
-  conf.execute_log_text_path = '/vol/rrrspec-log-texts'
+  conf.execute_log_text_path = '/opt/logs'
 end
 
 RRRSpec.configure(:worker) do |conf|
   conf.redis = REDIS_CONFIG
 
-  conf.rsync_remote_path = 'rsync://rsyncd/share/'
+  conf.rsync_remote_path = 'rsync://rsyncd/data/'
   conf.rsync_options = %w(
     --compress
     --times
