@@ -19,7 +19,7 @@ RRRSpec.configure(:server) do |conf|
   conf.redis = REDIS_CONFIG
 
   conf.persistence_db = DB_CONFIG
-  conf.execute_log_text_path = '/opt/logs'
+  conf.execute_log_text_path = '/var/log/rrrspec'
 end
 
 RRRSpec.configure(:worker) do |conf|
@@ -42,7 +42,7 @@ end
 
 RRRSpec.configure(:web) do |conf|
   conf.persistence_db = DB_CONFIG
-  conf.execute_log_text_path = '/opt/logs'
+  conf.execute_log_text_path = '/var/log/rrrspec'
 end
 
 RRRSpec.configure(:client) do |conf|
