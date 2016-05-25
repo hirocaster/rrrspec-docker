@@ -1,0 +1,1 @@
+FROM bfosberry/rsync
