@@ -13,4 +13,5 @@ sleep 10
 RUN_OPTION="--link rrrspec-redis:redis --link rrrspec-mysql:mysql --link rrrspec-rsyncd:rsyncd"
 
 docker run -d --name rrrspec-server ${RUN_OPTION} rrrspec/rrrspec-server
+docker run -d --name rrrspec-worker ${RUN_OPTION} rrrspec/rrrspec-worker
 docker run -d --name rrrspec-web -p 8080:8080 ${RUN_OPTION} rrrspec/rrrspec-web
