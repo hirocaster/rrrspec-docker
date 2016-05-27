@@ -18,6 +18,9 @@ ADD run-web.sh /tmp/run-web.sh
 # CMD /tmp/run.sh
 
 ENTRYPOINT [ \
+  "prehook", \
+    "ruby --version", \
+    "--", \
   "switch", \
     "shell=/bin/bash", \
     "--", \
