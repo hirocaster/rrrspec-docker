@@ -1,4 +1,4 @@
-FROM ruby:2.2
+FROM ruby:2.2.4
 
 ENV ENTRYKIT_VERSION 0.4.0
 
