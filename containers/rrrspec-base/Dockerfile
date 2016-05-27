@@ -11,8 +11,6 @@ RUN gem install --no-ri --no-rdoc rake foreman
 ADD lib /opt/lib/
 
 RUN git clone https://github.com/cookpad/rrrspec.git /opt/rrrspec
-RUN cd /opt/rrrspec/rrrspec ; bundle install
-RUN cd /opt/rrrspec/rrrspec-client ; rake build ; gem install pkg/*.gem
-RUN cd /opt/rrrspec/rrrspec-server ; rake build ; gem install pkg/*.gem
+RUN cd /opt/rrrspec/rrrspec-server ; bundle install ; rake build ; gem install pkg/*.gem
 
 CMD /bin/bash
