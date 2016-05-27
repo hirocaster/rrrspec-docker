@@ -68,10 +68,11 @@ RRRSpec.configure(:client) do |conf|
   end
 
   conf.setup_command = <<-SETUP
-    bundle install
+    bundle config --global silence_root_warning 1
+    ./bin/rrrspec-setup
   SETUP
   conf.slave_command = <<-SLAVE
-    rrrspec slave
+    ./bin/rrrspec-slave-setup && bundle exec rrrspec-client slave
   SLAVE
 
   conf.taskset_class = 'myapplication'
