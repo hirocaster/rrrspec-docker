@@ -17,7 +17,7 @@ RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERS
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && \
-  apt-get install -y nodejs rsync ssh && \
+  apt-get install -y nodejs rsync ssh net-tools && \
   update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10 && \
   apt-get clean
 RUN gem install --no-ri --no-rdoc rake foreman
